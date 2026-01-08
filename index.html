@@ -1,451 +1,488 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ScanWise AI | Next-Gen Tracker</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ScanWise AI | Vibrant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* --- MODERN THEME VARIABLES --- */
+        /* --- VIBRANT DESIGN SYSTEM --- */
         :root {
-            --primary: #4285F4;
-            --secondary: #34A853;
-            --accent: #EA4335;
-            --glass-bg: rgba(255, 255, 255, 0.95);
-            --glass-border: rgba(255, 255, 255, 0.5);
-            --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            --primary: #4F46E5;
+            --accent: #F43F5E;
+            --gradient-bg: linear-gradient(135deg, #F5F3FF 0%, #EDE9FE 100%);
+            --gradient-btn: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+            --gradient-card: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+            --text-dark: #1E1B4B;
+            --text-gray: #6B7280;
+            --white: #FFFFFF;
+            --shadow-colored: 0 10px 25px -5px rgba(99, 102, 241, 0.25);
+            --shadow-float: 0 20px 40px -10px rgba(0,0,0,0.1);
         }
 
-        body {
-            font-family: 'Outfit', sans-serif;
-            /* Animated Gradient Background */
-            background: linear-gradient(45deg, #4285F4, #34A853, #FBBC05, #EA4335);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            color: #333;
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body { 
+            font-family: 'Outfit', sans-serif; 
+            background: #1e1b4b; /* Dark background for desktop contrast */
+            margin: 0; 
+            display: flex; 
+            justify-content: center; 
+            min-height: 100vh; 
+            overflow-y: auto; 
         }
 
-        @keyframes gradientBG {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 0% 50%;
-            }
+        /* THE PHONE FRAME */
+        .mobile-frame { 
+            width: 100%; 
+            max-width: 420px; 
+            background: var(--gradient-bg); /* Subtle purple tint */
+            min-height: 100vh; 
+            position: relative; 
+            display: flex; 
+            flex-direction: column; 
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
         }
 
-        /* Glassmorphism Card */
-        .app-container {
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            width: 90%;
-            max-width: 450px;
-            padding: 30px;
-            border-radius: 24px;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--glass-border);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
+        .hidden { display: none !important; }
+        .fade-in { animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        .flex-col { display: flex; flex-direction: column; flex: 1; }
+
+        /* --- AUTH SCREEN (COLORFUL) --- */
+        .auth-screen { 
+            flex: 1; display: flex; flex-direction: column; justify-content: center; 
+            padding: 30px; text-align: center;
+            /* Cool background blob */
+            background: radial-gradient(circle at top left, #e0e7ff, transparent 40%),
+                        radial-gradient(circle at bottom right, #fae8ff, transparent 40%);
+        }
+        
+        .logo { font-size: 60px; margin-bottom: 10px; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.1)); }
+        
+        h2 { 
+            font-size: 32px; font-weight: 800; margin: 0 0 10px 0; 
+            background: var(--gradient-btn); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        p.subtitle { color: var(--text-gray); margin-bottom: 30px; font-size: 16px; font-weight: 500; }
+
+        /* VIBRANT INPUTS */
+        input { 
+            width: 100%; padding: 18px; margin-bottom: 15px; 
+            border: 2px solid white; background: white; border-radius: 20px; 
+            font-size: 16px; font-weight: 600; color: var(--text-dark); 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03); outline: none; transition: 0.3s;
+        }
+        input:focus { border-color: #8B5CF6; box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.1); }
+
+        /* GRADIENT BUTTONS */
+        .btn-main { 
+            width: 100%; padding: 18px; 
+            background: var(--gradient-btn); color: white; 
+            border: none; border-radius: 20px; 
+            font-size: 18px; font-weight: 700; cursor: pointer; margin-top: 10px;
+            box-shadow: var(--shadow-colored); transition: transform 0.1s;
+        }
+        .btn-main:active { transform: scale(0.98); }
+
+        .btn-link { 
+            background: none; border: none; color: #6366F1; margin-top: 20px; 
+            cursor: pointer; font-weight: 700; font-size: 14px; letter-spacing: 0.5px;
         }
 
-        /* Header Design */
-        .header h1 {
-            margin: 0;
-            background: linear-gradient(90deg, #4285F4, #34A853);
+        .error-msg { color: #EF4444; font-size: 14px; margin-bottom: 15px; font-weight: 700; }
 
-            /* ADD THESE 3 LINES TO FIX THE ERROR */
-            background-clip: text;
-            /* The standard version */
-            -webkit-background-clip: text;
-            /* The Chrome/Edge version */
-            -webkit-text-fill-color: transparent;
-            /* Makes the text see-through */
-            color: transparent;
-            /* Fallback */
-
-            font-size: 32px;
-            font-weight: 800;
-            letter-spacing: -1px;
+        /* USER LIST CARDS */
+        .user-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px; }
+        .user-card { 
+            display: flex; align-items: center; padding: 16px; 
+            background: white; border-radius: 24px; cursor: pointer; 
+            transition: 0.2s; box-shadow: 0 4px 15px rgba(0,0,0,0.03); text-align: left;
+        }
+        .user-card:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(99, 102, 241, 0.15); }
+        
+        .user-avatar { 
+            width: 50px; height: 50px; 
+            background: linear-gradient(135deg, #FFDEE9 0%, #B5FFFC 100%); 
+            color: #333; border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center; 
+            font-weight: 800; font-size: 20px; margin-right: 15px; 
         }
 
-        .total-badge {
-            background: #f1f3f4;
-            padding: 8px 16px;
-            border-radius: 50px;
-            display: inline-block;
-            margin-top: 10px;
-            font-weight: 600;
-            color: #5f6368;
-            border: 1px solid #e0e0e0;
+        /* --- DASHBOARD --- */
+        .app-header { 
+            padding: 50px 25px 20px 25px; 
+            background: rgba(255,255,255,0.8); backdrop-filter: blur(15px);
+            display: flex; justify-content: space-between; align-items: center; 
+            position: sticky; top: 0; z-index: 50;
+        }
+        .header-title { font-size: 24px; font-weight: 800; color: var(--text-dark); }
+
+        .content { padding: 25px; padding-bottom: 120px; }
+
+        /* TOTAL CARD (HOLOGRAPHIC) */
+        .total-box { 
+            background: var(--gradient-card); 
+            color: white; padding: 30px; border-radius: 30px; 
+            text-align: center; margin-bottom: 25px; 
+            box-shadow: 0 15px 30px -5px rgba(59, 130, 246, 0.4);
+            position: relative; overflow: hidden;
+        }
+        .total-box::before {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: rotate(30deg); animation: shine 3s infinite;
+        }
+        @keyframes shine { 0% { transform: translateX(-100%) rotate(30deg); } 100% { transform: translateX(100%) rotate(30deg); } }
+
+        /* UPLOAD ZONE */
+        .upload-zone { 
+            border: 3px dashed #C4B5FD; padding: 30px 0; border-radius: 24px; 
+            text-align: center; cursor: pointer; background: white; margin-bottom: 20px;
+            transition: 0.2s;
+        }
+        .upload-zone:active { background: #F5F3FF; border-color: #8B5CF6; }
+
+        /* COLORFUL LIST ITEMS */
+        .card { background: white; padding: 10px 20px; border-radius: 24px; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
+        
+        .history-item { 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 18px 0; border-bottom: 1px solid #F3F4F6; 
+        }
+        .history-item:last-child { border: none; }
+        
+        .cat-icon { 
+            width: 45px; height: 45px; background: #F3F4F6; border-radius: 14px; 
+            display: flex; align-items: center; justify-content: center; font-size: 22px; 
+            margin-right: 15px; color: #4F46E5;
+        }
+        
+        .store-name { font-weight: 700; color: var(--text-dark); font-size: 16px; }
+        .price-tag { 
+            font-weight: 800; color: #4F46E5; background: #EEF2FF; 
+            padding: 8px 12px; border-radius: 12px; font-size: 15px;
         }
 
-        .total-amount {
-            color: #2ea44f;
-            font-weight: 800;
+        /* PROFILE */
+        .profile-header { text-align: center; padding: 20px 0; }
+        .avatar-big { 
+            width: 100px; height: 100px; font-size: 40px; margin: 0 auto 20px auto; 
+            background: linear-gradient(135deg, #84FAB0 0%, #8FD3F4 100%); 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1); border: 4px solid white;
+        }
+        .btn-logout { 
+            width: 100%; padding: 18px; 
+            background: #FEF2F2; color: #EF4444; 
+            border: 2px solid #FEE2E2; border-radius: 20px; 
+            font-weight: 700; cursor: pointer; transition: 0.2s;
         }
 
-        /* Fancy Upload Zone */
-        .upload-zone {
-            margin-top: 25px;
-            border: 2px dashed #cbd5e1;
-            background: #f8fafc;
-            border-radius: 16px;
-            padding: 30px 20px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
+        /* FLOATING COLORFUL NAV */
+        .nav-bar { 
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); 
+            width: 90%; max-width: 380px;
+            background: #1E1B4B; /* Dark Nav for Contrast */
+            padding: 15px; border-radius: 35px; 
+            display: flex; justify-content: space-around; 
+            box-shadow: 0 20px 40px -5px rgba(30, 27, 75, 0.4); z-index: 100;
         }
+        .nav-item { text-align: center; color: rgba(255,255,255,0.5); font-size: 10px; font-weight: 700; cursor: pointer; width: 60px; transition: 0.3s; }
+        .nav-icon { font-size: 24px; display: block; margin-bottom: 2px; }
+        .nav-item.active { color: #A78BFA; transform: translateY(-3px); }
+        .nav-item.active .nav-icon { text-shadow: 0 0 10px rgba(167, 139, 250, 0.5); }
 
-        .upload-zone:hover {
-            border-color: var(--primary);
-            background: #edf4ff;
-            transform: translateY(-2px);
-        }
+        /* MODAL */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(30, 27, 75, 0.7); backdrop-filter: blur(5px); z-index: 999; display: flex; align-items: center; justify-content: center; }
+        .modal-box { background: white; width: 85%; padding: 30px; border-radius: 28px; text-align: center; box-shadow: 0 25px 50px rgba(0,0,0,0.3); animation: popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+        @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .modal-btns { display: flex; gap: 15px; margin-top: 25px; }
+        .btn-cancel { flex: 1; padding: 15px; background: #F3F4F6; border: none; border-radius: 16px; font-weight: 700; cursor:pointer; color: #6B7280; }
+        .btn-confirm { flex: 1; padding: 15px; background: #EF4444; color: white; border: none; border-radius: 16px; font-weight: 700; cursor:pointer; box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4); }
 
-        .icon-bounce {
-            font-size: 32px;
-            display: block;
-            margin-bottom: 10px;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-
-            0%,
-            20%,
-            50%,
-            80%,
-            100% {
-                transform: translateY(0);
-            }
-
-            40% {
-                transform: translateY(-10px);
-            }
-
-            60% {
-                transform: translateY(-5px);
-            }
-        }
-
-        #previewImage {
-            max-width: 100%;
-            max-height: 200px;
-            border-radius: 12px;
-            display: none;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            margin: 0 auto;
-        }
-
-        input[type="file"] {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            cursor: pointer;
-        }
-
-        /* The Button */
-        button {
-            background: linear-gradient(135deg, #4285F4 0%, #2b7de9 100%);
-            color: white;
-            border: none;
-            padding: 16px;
-            width: 100%;
-            border-radius: 14px;
-            font-size: 16px;
-            font-weight: 700;
-            margin-top: 20px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(66, 133, 244, 0.3);
-            transition: all 0.2s;
-            font-family: 'Outfit', sans-serif;
-        }
-
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(66, 133, 244, 0.4);
-        }
-
-        button:active {
-            transform: scale(0.98);
-        }
-
-        button:disabled {
-            background: #cbd5e1;
-            box-shadow: none;
-            cursor: wait;
-        }
-
-        #statusMessage {
-            margin-top: 15px;
-            font-size: 14px;
-            min-height: 20px;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        /* History List - The Fun Part */
-        .history-section {
-            margin-top: 30px;
-            text-align: left;
-        }
-
-        .history-title {
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #999;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .expense-item {
-            background: white;
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 10px;
-            border: 1px solid #eee;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
-            transition: transform 0.2s;
-            animation: slideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .expense-item:hover {
-            transform: scale(1.02);
-            border-color: var(--primary);
-        }
-
-        .store-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .category-icon {
-            background: #e8f0fe;
-            color: var(--primary);
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-        }
-
-        .store-name {
-            font-weight: 700;
-            color: #333;
-            display: block;
-        }
-
-        .meta-text {
-            font-size: 12px;
-            color: #888;
-        }
-
-        .price-tag {
-            font-weight: 800;
-            color: #333;
-            font-size: 16px;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
     </style>
 </head>
-
 <body>
 
-    <div class="app-container">
-        <div class="header">
-            <h1>ScanWise AI</h1>
-            <div class="total-badge">
-                Total Spent: <span id="headerTotal" class="total-amount">₹0.00</span>
-            </div>
+<div class="mobile-frame">
+
+    <div id="viewAccountList" class="auth-screen fade-in">
+        <div class="logo">🌈</div>
+        <h2>Who's Ready?</h2>
+        <p class="subtitle">Pick your profile to start scanning.</p>
+        <div id="userListContainer" class="user-list"></div>
+        <button class="btn-link" onclick="gotoSignup()">+ Create New Profile</button>
+    </div>
+
+    <div id="viewPassword" class="auth-screen hidden fade-in">
+        <div class="user-avatar avatar-big" id="loginAvatar">U</div>
+        <h3 id="loginNameDisplay" style="margin:0 0 5px 0;">User</h3>
+        <p id="loginEmailDisplay" style="color:#6B7280; margin:0 0 25px 0; font-size:14px;">email</p>
+        <div id="loginMsg" class="error-msg"></div>
+        <input type="password" id="inpPass" placeholder="Enter Password">
+        <button class="btn-main" onclick="doLogin()">Unlock Dashboard</button>
+        <button class="btn-link" onclick="initLoginScreen()">← Switch Account</button>
+    </div>
+
+    <div id="viewSignup" class="auth-screen hidden fade-in">
+        <div class="logo">🚀</div>
+        <h2>Let's Go!</h2>
+        <p class="subtitle">Join the smartest expense tracker.</p>
+        <div id="regMsg" class="error-msg"></div>
+        <input type="text" id="regName" placeholder="Full Name">
+        <input type="email" id="regEmail" placeholder="Email Address">
+        <input type="password" id="regPass" placeholder="Create Password">
+        <button class="btn-main" onclick="doSignup()">Get Started</button>
+        <button class="btn-link" onclick="initLoginScreen()">Cancel</button>
+    </div>
+
+    <div id="viewApp" class="flex-col hidden fade-in">
+        <div class="app-header">
+            <div class="header-title" id="pageTitle">Overview</div>
+            <div class="user-avatar" style="width:40px; height:40px; font-size:16px; margin:0;" id="headerAvatar">U</div>
         </div>
 
-        <div class="upload-zone">
-            <div id="placeholder">
-                <span class="icon-bounce">📸</span>
-                <p style="margin:0; color:#64748b; font-weight:500;">Drop receipt or click to scan</p>
-                <p style="margin:5px 0 0; color:#94a3b8; font-size:12px;">Supports JPG, PNG</p>
-            </div>
-            <img id="previewImage" alt="Preview">
-            <input type="file" id="imageInput" accept="image/*">
-        </div>
-
-        <button id="scanBtn">Scan Receipt 🚀</button>
-        <div id="statusMessage"></div>
-
-        <div class="history-section">
-            <div class="history-title">Recent Activity</div>
-            <div id="expenseList">
-                <div style="text-align:center; padding:20px; color:#bdc1c6; font-size:13px; font-style:italic;">
-                    No receipts scanned yet...
+        <div class="content">
+            <div id="tabHome">
+                <div class="total-box">
+                    <div style="font-size:13px; opacity:0.9; text-transform:uppercase; letter-spacing:1px; font-weight:700;">Total Spent</div>
+                    <div style="font-size:48px; font-weight:800; margin-top:5px; text-shadow: 0 4px 10px rgba(0,0,0,0.2);" id="txtTotal">₹0.00</div>
                 </div>
+                
+                <h4 style="margin:0 0 15px 5px; color:#4B5563; font-weight:700;">ADD EXPENSE</h4>
+                <div class="upload-zone" onclick="document.getElementById('fileInp').click()">
+                    <div id="ph">
+                        <div style="font-size:50px; margin-bottom:10px;">📸</div>
+                        <div style="color:#6B7280; font-weight:600;">Tap to Scan Receipt</div>
+                    </div>
+                    <img id="preview" style="max-width:100%; max-height:180px; border-radius:12px; display:none; margin:0 auto; box-shadow:0 10px 25px rgba(0,0,0,0.1);">
+                    <input type="file" id="fileInp" accept="image/*" style="display:none" onchange="showPreview(this)">
+                </div>
+
+                <button id="btnScan" class="btn-main" onclick="runGemini()">Analyze Receipt ⚡</button>
+                <div id="status" style="text-align:center; margin-top:20px; font-weight:600; font-size:14px; color:#6B7280; min-height: 20px;"></div>
+            </div>
+
+            <div id="tabHistory" class="hidden">
+                <div class="card" id="listHistory" style="padding:0;"></div>
+            </div>
+
+            <div id="tabProfile" class="hidden">
+                <div class="card profile-header">
+                    <div class="user-avatar avatar-big" id="profileAvatarBig">U</div>
+                    <h3 id="profileName" style="margin:0;">User Name</h3>
+                    <p id="profileEmail" style="color:#6B7280; margin:5px 0 0 0;">email@test.com</p>
+                </div>
+                <button class="btn-logout" onclick="showLogoutModal()">Sign Out</button>
+                <p style="text-align:center; color:#9CA3AF; font-size:12px; margin-top:25px; font-weight:600;">Version 5.0 Vibrant</p>
+            </div>
+        </div>
+
+        <div class="nav-bar">
+            <div class="nav-item active" id="navHome" onclick="openTab('home')"><span class="nav-icon">🏠</span>Home</div>
+            <div class="nav-item" id="navHistory" onclick="openTab('history')"><span class="nav-icon">📊</span>History</div>
+            <div class="nav-item" id="navProfile" onclick="openTab('profile')"><span class="nav-icon">👤</span>Profile</div>
+        </div>
+    </div>
+
+    <div id="logoutModal" class="modal-overlay hidden">
+        <div class="modal-box">
+            <h3 style="margin-top:0; font-size:24px;">Log Out?</h3>
+            <p style="color:#6B7280; margin-bottom:25px;">Are you sure you want to exit?</p>
+            <div class="modal-btns">
+                <button class="btn-cancel" onclick="closeLogoutModal()">Cancel</button>
+                <button class="btn-confirm" onclick="confirmLogout()">Yes, Log Out</button>
             </div>
         </div>
     </div>
 
-    <script>
-        const API_KEY = "AIzaSyBKUj1DobNyxkRskk_cHzzV9xEl_bnIR58";
-        const MODEL_NAME = "models/gemini-2.5-flash";
+</div>
 
-        const imageInput = document.getElementById('imageInput');
-        const previewImage = document.getElementById('previewImage');
-        const placeholder = document.getElementById('placeholder');
-        const scanBtn = document.getElementById('scanBtn');
-        const status = document.getElementById('statusMessage');
-        const expenseList = document.getElementById('expenseList');
+<script>
+    const API = "ENTER_YOUR_API_KEY_HERE";
+    let selectedEmail = "";
+    
+    // --- 1. STARTUP ---
+    window.onload = initLoginScreen;
 
-        let totalSpent = 0;
-        let itemCount = 0;
+    function initLoginScreen() {
+        ['viewAccountList','viewPassword','viewSignup','viewApp'].forEach(id => document.getElementById(id).classList.add('hidden'));
+        let db = JSON.parse(localStorage.getItem('users') || "{}");
+        if(Object.keys(db).length === 0) document.getElementById('viewSignup').classList.remove('hidden');
+        else { renderUserList(db); document.getElementById('viewAccountList').classList.remove('hidden'); }
+    }
 
-        imageInput.onchange = (e) => {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = (event) => {
-                    previewImage.src = event.target.result;
-                    previewImage.style.display = 'block';
-                    placeholder.style.display = 'none';
-                    status.innerText = "Ready to analyze!";
-                    status.style.color = "#333";
-                };
-                reader.readAsDataURL(file);
-            }
-        };
+    function renderUserList(db) {
+        let html = "";
+        for(let email in db) {
+            let user = db[email];
+            html += `<div class="user-card" onclick="selectUser('${email}', '${user.name}')">
+                <div class="user-avatar">${user.name[0].toUpperCase()}</div>
+                <div><div style="font-weight:700; color:var(--text-dark)">${user.name}</div><div style="font-size:13px; color:var(--text-gray)">${email}</div></div>
+            </div>`;
+        }
+        document.getElementById('userListContainer').innerHTML = html;
+    }
 
-        scanBtn.onclick = async () => {
-            if (!imageInput.files[0]) return alert("Please select a photo first!");
+    function selectUser(email, name) {
+        selectedEmail = email;
+        document.getElementById('viewAccountList').classList.add('hidden');
+        document.getElementById('viewPassword').classList.remove('hidden');
+        document.getElementById('loginAvatar').innerText = name[0].toUpperCase();
+        document.getElementById('loginNameDisplay').innerText = name;
+        document.getElementById('loginEmailDisplay').innerText = email;
+        document.getElementById('inpPass').value = "";
+        document.getElementById('loginMsg').innerText = "";
+    }
 
-            scanBtn.disabled = true;
-            scanBtn.innerHTML = "Processing with Gemini... <span class='icon-bounce' style='display:inline-block; font-size:14px'>🧠</span>";
-            status.innerText = "Extracting data...";
-            status.style.color = "#4285F4";
+    // --- 2. AUTH ---
+    function gotoSignup() { document.getElementById('viewAccountList').classList.add('hidden'); document.getElementById('viewSignup').classList.remove('hidden'); }
+    
+    function openTab(name) {
+        ['tabHome','tabHistory','tabProfile'].forEach(t => document.getElementById(t).classList.add('hidden'));
+        ['navHome','navHistory','navProfile'].forEach(n => document.getElementById(n).classList.remove('active'));
+        if(name==='home') { document.getElementById('tabHome').classList.remove('hidden'); document.getElementById('navHome').classList.add('active'); document.getElementById('pageTitle').innerText="Overview"; }
+        if(name==='history') { document.getElementById('tabHistory').classList.remove('hidden'); document.getElementById('navHistory').classList.add('active'); document.getElementById('pageTitle').innerText="History"; }
+        if(name==='profile') { document.getElementById('tabProfile').classList.remove('hidden'); document.getElementById('navProfile').classList.add('active'); document.getElementById('pageTitle').innerText="Profile"; }
+    }
 
-            try {
-                const file = imageInput.files[0];
-                const base64 = await toBase64(file);
+    function doSignup() {
+        let name = document.getElementById('regName').value;
+        let email = document.getElementById('regEmail').value.toLowerCase();
+        let pass = document.getElementById('regPass').value;
+        if(!name || !email || !pass) { document.getElementById('regMsg').innerText = "Please fill all fields"; return; }
+        
+        let db = JSON.parse(localStorage.getItem('users') || "{}");
+        if(db[email]) { document.getElementById('regMsg').innerText = "Account already exists"; return; }
 
-                const url = `https://generativelanguage.googleapis.com/v1beta/${MODEL_NAME}:generateContent?key=${API_KEY}`;
+        db[email] = { name, pass };
+        localStorage.setItem('users', JSON.stringify(db));
+        initLoginScreen();
+    }
 
-                const response = await fetch(url, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [{
-                            parts: [
-                                { text: "Extract: Store Name, Total Amount (number only), Date, Category. Format: Store: [Name], Total: [Amount], Date: [Date], Category: [Category]" },
-                                { inline_data: { mime_type: file.type, data: base64 } }
-                            ]
-                        }]
-                    })
-                });
+    function doLogin() {
+        let pass = document.getElementById('inpPass').value;
+        let db = JSON.parse(localStorage.getItem('users') || "{}");
+        let user = db[selectedEmail];
 
-                const data = await response.json();
-                if (data.error) throw new Error(data.error.message);
+        if(user.pass !== pass) { document.getElementById('loginMsg').innerText = "Incorrect Password"; return; }
 
-                const text = data.candidates[0].content.parts[0].text;
+        document.getElementById('headerAvatar').innerText = user.name[0].toUpperCase();
+        document.getElementById('profileAvatarBig').innerText = user.name[0].toUpperCase();
+        document.getElementById('profileName').innerText = user.name;
+        document.getElementById('profileEmail').innerText = selectedEmail;
+        loadData();
+        
+        document.getElementById('viewPassword').classList.add('hidden');
+        document.getElementById('viewApp').classList.remove('hidden');
+        openTab('home');
+    }
 
-                // --- REGEX FIX INCLUDED HERE ---
-                const store = text.match(/Store:\s*(.*?)(,|$|\n)/i)?.[1] || "Unknown Store";
-                const amountStr = text.match(/Total:\s*(.*?)(,|$|\n)/i)?.[1] || "0";
-                const date = text.match(/Date:\s*(.*?)(,|$|\n)/i)?.[1] || "Today";
-                const cat = text.match(/Category:\s*(.*?)(,|$|\n)/i)?.[1] || "General";
+    function showLogoutModal() { document.getElementById('logoutModal').classList.remove('hidden'); }
+    function closeLogoutModal() { document.getElementById('logoutModal').classList.add('hidden'); }
+    function confirmLogout() {
+        closeLogoutModal();
+        document.getElementById('txtTotal').innerText = "₹0.00";
+        document.getElementById('listHistory').innerHTML = "";
+        document.getElementById('preview').src = "";
+        document.getElementById('preview').style.display = "none";
+        document.getElementById('ph').style.display = "block";
+        document.getElementById('fileInp').value = "";
+        selectedEmail = "";
+        initLoginScreen();
+    }
 
-                const amount = parseFloat(amountStr.replace(/[^0-9.]/g, '')) || 0;
+    // --- HELPER TO GET EMOJI ---
+    function getIcon(cat) {
+        cat = cat.toLowerCase();
+        if(cat.includes('food') || cat.includes('restaurant') || cat.includes('cafe')) return '🍔';
+        if(cat.includes('travel') || cat.includes('fuel') || cat.includes('uber')) return '🚕';
+        if(cat.includes('shop') || cat.includes('mall') || cat.includes('store')) return '🛍️';
+        if(cat.includes('bill') || cat.includes('utility')) return '💡';
+        return '📄';
+    }
 
-                addExpenseToList(store, date, cat, amount);
-
-                resetScanner();
-                status.innerText = "Success! Saved to history. ✅";
-                status.style.color = "#34A853";
-
-            } catch (err) {
-                console.error(err);
-                status.innerText = "Error: " + err.message;
-                status.style.color = "#EA4335";
-            } finally {
-                scanBtn.disabled = false;
-                scanBtn.innerText = "Scan Receipt 🚀";
-            }
-        };
-
-        function addExpenseToList(store, date, category, amount) {
-            if (itemCount === 0) expenseList.innerHTML = "";
-
-            // Get a cute icon based on category
-            let icon = "📄";
-            const c = category.toLowerCase();
-            if (c.includes("food") || c.includes("restaurant")) icon = "🍔";
-            else if (c.includes("travel") || c.includes("fuel")) icon = "🚕";
-            else if (c.includes("shopping")) icon = "🛍️";
-            else if (c.includes("tech") || c.includes("electronic")) icon = "💻";
-
-            const itemHTML = `
-                <div class="expense-item">
-                    <div class="store-info">
-                        <div class="category-icon">${icon}</div>
-                        <div>
-                            <span class="store-name">${store}</span>
-                            <span class="meta-text">${date} • ${category}</span>
-                        </div>
+    function loadData() {
+        let data = JSON.parse(localStorage.getItem('data_' + selectedEmail) || '{"total":0, "items":[]}');
+        document.getElementById('txtTotal').innerText = "₹" + data.total.toFixed(2);
+        let html = "";
+        data.items.forEach(item => {
+            let icon = getIcon(item.category || "General");
+            html += `<div class="history-item">
+                <div style="display:flex; align-items:center;">
+                    <div class="cat-icon">${icon}</div>
+                    <div>
+                        <div class="store-name">${item.store}</div>
+                        <div style="font-size:12px; color:var(--text-gray); margin-top:2px;">${item.date} • ${item.category}</div>
                     </div>
-                    <div class="price-tag">₹${amount.toFixed(2)}</div>
                 </div>
-            `;
+                <div class="price-tag">₹${item.amount.toFixed(2)}</div></div>`;
+        });
+        document.getElementById('listHistory').innerHTML = html || "<div style='text-align:center; padding:30px; color:#9ca3af;'>No scans yet</div>";
+    }
 
-            expenseList.insertAdjacentHTML('afterbegin', itemHTML);
-
-            totalSpent += amount;
-            itemCount++;
-            document.getElementById('headerTotal').innerText = `₹${totalSpent.toFixed(2)}`;
+    function showPreview(input) {
+        if(input.files[0]) {
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('preview').src = e.target.result;
+                document.getElementById('preview').style.display = 'block';
+                document.getElementById('ph').style.display = 'none';
+            };
+            reader.readAsDataURL(input.files[0]);
         }
+    }
 
-        function resetScanner() {
-            imageInput.value = "";
-            previewImage.style.display = 'none';
-            placeholder.style.display = 'block';
-        }
+    async function runGemini() {
+        let input = document.getElementById('fileInp');
+        let btn = document.getElementById('btnScan');
+        let status = document.getElementById('status');
 
-        function toBase64(file) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onload = () => resolve(reader.result.split(',')[1]);
-                reader.onerror = error => reject(error);
+        if(!input.files[0]) { status.innerText = "Select Image First"; status.style.color = "#EF4444"; return; }
+
+        btn.disabled = true; btn.innerText = "Scanning..."; status.innerText = "Analyzing Receipt..."; status.style.color = "#4F46E5";
+
+        try {
+            let file = input.files[0];
+            let base64 = await new Promise(r => { let reader = new FileReader(); reader.onload = () => r(reader.result.split(',')[1]); reader.readAsDataURL(file); });
+
+            let res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API}`, {
+                method: 'POST', headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ contents: [{ parts: [ { text: "Extract: Store Name, Category (Food, Travel, Shopping, Bills, or General), Total Amount (number), Date. Format: Store: [Name], Category: [Type], Total: [Amount], Date: [Date]" }, { inline_data: { mime_type: file.type, data: base64 } } ] }] })
             });
-        }
-    </script>
-</body>
 
+            let json = await res.json();
+            
+            if(json.error) {
+                if(json.error.code === 429 || json.error.message.includes('quota')) {
+                    throw new Error("⚠️ System Busy. Please wait 1 min.");
+                }
+                throw new Error("AI Error: " + json.error.message);
+            }
+
+            let text = json.candidates[0].content.parts[0].text;
+            let store = text.match(/Store:\s*(.*?)(,|$|\n)/i)?.[1] || "Store";
+            let category = text.match(/Category:\s*(.*?)(,|$|\n)/i)?.[1] || "General";
+            let amountStr = text.match(/Total:\s*(.*?)(,|$|\n)/i)?.[1] || "0";
+            let date = text.match(/Date:\s*(.*?)(,|$|\n)/i)?.[1] || "Today";
+            let amount = parseFloat(amountStr.replace(/[^0-9.]/g, '')) || 0;
+
+            let data = JSON.parse(localStorage.getItem('data_' + selectedEmail) || '{"total":0, "items":[]}');
+            data.items.unshift({ store, date, amount, category });
+            data.total += amount;
+            localStorage.setItem('data_' + selectedEmail, JSON.stringify(data));
+
+            loadData();
+            status.innerText = "Scan Complete! ✅"; status.style.color = "#10B981";
+            input.value = ""; document.getElementById('preview').style.display = 'none'; document.getElementById('ph').style.display = 'block';
+
+        } catch(e) {
+            console.error(e);
+            status.innerText = e.message; status.style.color = "#EF4444";
+        } finally {
+            btn.disabled = false; btn.innerText = "Analyze Receipt ⚡";
+        }
+    }
+</script>
+</body>
 </html>
