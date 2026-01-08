@@ -1,4 +1,4 @@
-# 1st-hackathon
+# IMACE HACKATHON
 # 🧾 ScanWise AI
 
 **ScanWise AI** is a smart, AI-powered expense tracker designed to eliminate manual data entry. By simply taking a photo of a receipt, the application uses Google's **Gemini AI** to automatically extract the store name, transaction date, total amount, and spending category.
@@ -67,7 +67,4 @@ This project uses the **Free Tier** of the Google Gemini API.
 
 ---
 *Built for the 2025 AI Hackathon.*
-
-
-
-***Note : Enter your API Key in place of 
+***Note : Enter your API Key in place of "ENTER_YOUR_API_KEY_HERE" in Javascript.***
